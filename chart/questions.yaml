@@ -1,0 +1,41 @@
+---
+rancher_min_version: 2.3.0
+questions:
+- variable: defaultImage
+  default: true
+  description: "Use default default image"
+  type: boolean
+  required: true
+  label: Use default default image
+  show_subquestion_if: false
+  group: "default image"
+  subquestions:
+  - variable: image.repository
+    default: "chint-public/demo/book"
+    description: "bookstore image"
+    type: string
+    label: bookstore image
+    required: true
+  - variable: image.tag
+    default: "dev"
+    description: "bookstore image tag"
+    type: string
+    label: bookstore image tag
+- variable: replicas
+  default: 1
+  description: "replicas of application"
+  type: int
+  label: replicas
+  required: true
+- variable: config.server.port
+  default: 8080
+  description: "application server port"
+  type: int
+  label: application server port
+  required: false  
+- variable: ingress.enabled
+  default: false
+  description: "ingress enable"
+  type: boolean
+  required: true
+  label: ingress enable

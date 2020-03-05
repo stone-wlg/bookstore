@@ -1,0 +1,7 @@
+apiVersion: v2
+appVersion: v0.0.1
+icon: file://app.png
+description: A Helm chart for Kubernetes
+name: bookstore
+type: application
+version: v0.0.1

@@ -1,0 +1,22 @@
+config:
+  server:
+    port: 8080
+fullnameOverride: ""
+image:
+  pullPolicy: IfNotPresent
+  repository: harbor06.chint.com/chint-public/demo/book
+  tag: dev
+nameOverride: ""
+replicas: 1
+resources: {}
+serviceAccount:
+  create: true
+service:
+  type: ClusterIP
+  port: 8080
+ingress:
+  enabled: true
+  hosts:
+    - host: bookstore.chintcloud.net
+      serviceName: bookstore
+      servicePort: 8080

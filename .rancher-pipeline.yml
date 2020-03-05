@@ -1,0 +1,20 @@
+stages:
+- name: package
+  steps:
+  - runScriptConfig:
+      image: maven:3.6.3-jdk-8-slim
+      shellScript: |-
+        pwd
+        cd ./book
+        mvn package
+        cp ./target/app.jar ./docker
+- name: image
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./book/docker/Dockerfile
+      buildContext: ./book/docker
+      tag: chint-public/demo/book:dev
+      pushRemote: true
+      registry: harbor06.chint.com
+timeout: 60
+notification: {}

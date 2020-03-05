@@ -1,0 +1,19 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "application.fullname" . }}
+  labels:
+    {{- include "application.labels" . | nindent 4 }}     
+spec:
+  rules:
+    {{- range $item := .Values.ingress.hosts }}
+    - host: {{ $item.host }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ $item.serviceName }}
+              servicePort: {{ $item.servicePort }}
+    {{- end -}}    
+{{- end }}
