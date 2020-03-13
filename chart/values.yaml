@@ -3,13 +3,13 @@ config:
     port: 8080
 fullnameOverride: ""
 image:
-  pullPolicy: IfNotPresent
-  repository: harbor06.chint.com/chint-public/demo/book
+  pullPolicy: Always
+  repository: harbor06.chint.com/chint-public/demo/bookstore
   tag: dev
 nameOverride: ""
 replicas: 1
 resources: {}
-serviceAccount:
+rbac:
   create: true
 service:
   type: ClusterIP
@@ -20,3 +20,12 @@ ingress:
     - host: bookstore.chintcloud.net
       serviceName: bookstore
       servicePort: 8080
+jmx:
+  enabled: true
+  name: jmx
+  port: 5556
+  image:
+    pullPolicy: Always
+    repository: harbor06.chint.com/chint-public/bitnami/jmx-exporter
+    tag: 0.12.0
+

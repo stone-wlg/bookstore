@@ -10,4 +10,8 @@ data:
   application.yaml: |-
     server:
       port: {{ .Values.config.server.port }}
+  jmx.yaml: |-
+    hostPort: "localhost:7190"
+    lowercaseOutputLabelNames: true
+    lowercaseOutputName: true    
 {{- end }}

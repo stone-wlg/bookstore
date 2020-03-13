@@ -11,7 +11,7 @@ questions:
   group: "default image"
   subquestions:
   - variable: image.repository
-    default: "chint-public/demo/book"
+    default: "harbor06.chint.com/chint-public/demo/bookstore"
     description: "bookstore image"
     type: string
     label: bookstore image
@@ -32,10 +32,30 @@ questions:
   description: "application server port"
   type: int
   label: application server port
-  required: false  
+  required: true  
 - variable: ingress.enabled
-  default: false
+  default: true
   description: "ingress enable"
   type: boolean
   required: true
   label: ingress enable
+- variable: jmx.enabled
+  default: true
+  description: "jmx enable"
+  type: boolean
+  required: true
+  label: jmx enable
+  show_subquestion_if: true
+  group: "jmx image"
+  subquestions:
+  - variable: jmx.image.repository
+    default: "harbor06.chint.com/chint-public/bitnami/jmx-exporter"
+    description: "jmx image"
+    type: string
+    label: jmx image
+    required: true
+  - variable: jmx.image.tag
+    default: "0.12.0"
+    description: "jmx image tag"
+    type: string
+    label: jmx image tag

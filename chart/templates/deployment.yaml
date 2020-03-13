@@ -32,6 +32,20 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        {{- if .Values.jmx.enabled }}
+        - name: {{ .Values.jmx.name }}
+          image: "{{ .Values.jmx.image.repository }}:{{ .Values.jmx.image.tag }}"
+          imagePullPolicy: {{ .Values.jmx.image.pullPolicy }}
+          args:
+          - "{{ .Values.jmx.port }}"
+          - "/jmx.yaml"            
+          {{- if .Values.config }}
+          volumeMounts:
+            - name: config
+              subPath: jmx.yaml
+              mountPath: /jmx.yaml
+          {{- end }}                   
+        {{- end }}
       {{- if .Values.config }}     
       volumes:
         - name: config
