@@ -8,7 +8,7 @@
     <relativePath/>
   </parent>
   <groupId>com.stone.bookstore</groupId>
-  <artifactId>book</artifactId>
+  <artifactId>bookstore</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>demo</name>
   <description>Demo project for Spring Boot</description>
