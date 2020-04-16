@@ -40,10 +40,10 @@ questions:
   required: true
   label: ingress enable
 - variable: jmx.enabled
-  default: true
+  default: false
   description: "jmx enable"
   type: boolean
-  required: false
+  required: true
   label: jmx enable
   show_subquestion_if: true
   group: "jmx image"
