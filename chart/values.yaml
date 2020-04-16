@@ -4,8 +4,8 @@ config:
 fullnameOverride: ""
 image:
   pullPolicy: Always
-  repository: harbor06.chint.com/chint-public/demo/bookstore
-  tag: dev
+  repository: stonewlg/bookstore
+  tag: latest
 nameOverride: ""
 replicas: 1
 resources: {}
@@ -17,15 +17,19 @@ service:
 ingress:
   enabled: true
   hosts:
-    - host: bookstore.chintcloud.net
+    - host: bookstore.dev.chintcloud.net
       serviceName: bookstore
       servicePort: 8080
 jmx:
-  enabled: true
+  enabled: false
   name: jmx
   port: 5556
   image:
     pullPolicy: Always
-    repository: harbor06.chint.com/chint-public/bitnami/jmx-exporter
+    repository: bitnami/jmx-exporter
     tag: 0.12.0
 
+skywalking:
+  enabled: true
+  service_name: bookstore
+  backend_service: "skywalking-skywalking-oap.skywalking.svc.cluster.local:11800"

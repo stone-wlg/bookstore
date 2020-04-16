@@ -20,15 +20,38 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       serviceAccountName: {{ include "application.serviceAccountName" . }}
+      initContainers:
+      - name: init-agent
+        image: stonewlg/monitor-agent:latest
+        imagePullPolicy: IfNotPresent
+        command: ["cp", "-r", "/agent/*", "/tmp/agent"]
+        volumeMounts:
+        - name: agent
+          mountPath: /tmp/agent      
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          {{- if .Values.jmx.enabled }}          
+            - name: "JAVA_AGENT"
+              value: "-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ .Values.jmx.port }} -Dcom.sun.management.jmxremote.rmi.port={{ .Values.jmx.port }} -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.local.only=false"          
+          {{- end }}
+          {{- if .Values.skywalking.enabled }}          
+            - name: "JAVA_AGENT"
+              value: "-javaagent:/agent/skywalking-agent/skywalking-agent.jar"
+            - name: "SW_AGENT_NAME"
+              value: "{{ skywalking.service_name }}"
+            - name: "SW_AGENT_COLLECTOR_BACKEND_SERVICES"
+              value: "{{ skywalking.backend_service }}"
+          {{- end }}          
           {{- if .Values.config }}
           volumeMounts:
             - name: config
               subPath: application.yaml
               mountPath: /application.yaml
+            - name: agent
+              mountPath: /agent              
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -44,11 +67,15 @@ spec:
             - name: config
               subPath: jmx.yaml
               mountPath: /jmx.yaml
-          {{- end }}                   
+            - name: agent
+              mountPath: /agent
+          {{- end }}               
         {{- end }}
       {{- if .Values.config }}     
       volumes:
         - name: config
           configMap:
             name: {{ include "application.fullname" . }}
+        - name: agent
+          emptyDir: {}
       {{- end }}
