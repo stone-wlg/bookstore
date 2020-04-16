@@ -24,8 +24,7 @@ spec:
       - name: init-agent
         image: stonewlg/monitor-agent:latest
         imagePullPolicy: IfNotPresent
-        command: ["cp"]
-        args: ["-r", "/agent/*", "/tmp/agent"]
+        command: ["cp", "-r", "/agent/", "/tmp/agent"]
         volumeMounts:
         - name: agent
           mountPath: /tmp/agent      
