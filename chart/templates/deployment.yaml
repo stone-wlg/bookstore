@@ -41,9 +41,9 @@ spec:
             - name: "JAVA_AGENT"
               value: "-javaagent:/agent/skywalking-agent/skywalking-agent.jar"
             - name: "SW_AGENT_NAME"
-              value: "{{ skywalking.service_name }}"
+              value: "{{ .Values.skywalking.service_name }}"
             - name: "SW_AGENT_COLLECTOR_BACKEND_SERVICES"
-              value: "{{ skywalking.backend_service }}"
+              value: "{{ .Values.skywalking.backend_service }}"
           {{- end }}          
           {{- if .Values.config }}
           volumeMounts:
