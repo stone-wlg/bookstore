@@ -43,7 +43,7 @@ questions:
   default: true
   description: "jmx enable"
   type: boolean
-  required: true
+  required: false
   label: jmx enable
   show_subquestion_if: true
   group: "jmx image"
