@@ -51,7 +51,8 @@ spec:
               subPath: application.yaml
               mountPath: /application.yaml
             - name: agent
-              mountPath: /agent           
+              mountPath: /agent
+              subPath: agent        
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -69,7 +70,6 @@ spec:
               mountPath: /jmx.yaml
             - name: agent
               mountPath: /agent
-              subPath: agent
           {{- end }}               
         {{- end }}
       {{- if .Values.config }}     
