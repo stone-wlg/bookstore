@@ -69,7 +69,7 @@ spec:
               mountPath: /jmx.yaml
             - name: agent
               mountPath: /agent
-              subPath: /agent
+              subPath: agent
           {{- end }}               
         {{- end }}
       {{- if .Values.config }}     
