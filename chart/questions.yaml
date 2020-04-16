@@ -46,7 +46,7 @@ questions:
   required: true
   label: jmx enable
   show_subquestion_if: true
-  group: "jmx image"
+  group: "jmx"
   subquestions:
   - variable: jmx.image.repository
     default: "bitnami/jmx-exporter"
