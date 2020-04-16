@@ -33,3 +33,7 @@ skywalking:
   enabled: true
   service_name: bookstore
   backend_service: "skywalking-skywalking-oap.skywalking.svc.cluster.local:11800"
+  image:
+    pullPolicy: Always
+    repository: stonewlg/monitor-agent
+    tag: latest

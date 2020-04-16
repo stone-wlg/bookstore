@@ -59,3 +59,33 @@ questions:
     description: "jmx image tag"
     type: string
     label: jmx image tag
+- variable: skywalking.enabled
+  default: true
+  description: "skywalking enable"
+  type: boolean
+  required: true
+  label: skywalking enable
+  show_subquestion_if: true
+  group: "skywalking"
+  subquestions:
+  - variable: skywalking.service_name
+    default: "bookstore"
+    description: "skywalking service name"
+    type: string
+    required: true
+  - variable: skywalking.backend_service
+    default: "skywalking-skywalking-oap.skywalking.svc.cluster.local:11800"
+    description: "skywalking backend service"
+    type: string
+    required: true    
+  - variable: skywalking.image.repository
+    default: "stonewlg/monitor-agent"
+    description: "skywalking image"
+    type: string
+    label: skywalking image
+    required: true
+  - variable: skywalking.image.tag
+    default: "latest"
+    description: "skywalking image tag"
+    type: string
+    label: jmx image tag

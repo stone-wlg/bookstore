@@ -22,8 +22,8 @@ spec:
       serviceAccountName: {{ include "application.serviceAccountName" . }}
       initContainers:
       - name: init-agent
-        image: stonewlg/monitor-agent:latest
-        imagePullPolicy: IfNotPresent
+        image: {{ .Values.skywalking.image.repository }}:{{ .Values.skywalking.image.tag }}
+        imagePullPolicy: {{ .Values.skywalking.image.pullPolicy }}
         command: ["cp", "-r", "/agent", "/tmp/agent"]
         volumeMounts:
         - name: agent
