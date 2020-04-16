@@ -24,7 +24,7 @@ spec:
       - name: init-agent
         image: stonewlg/monitor-agent:latest
         imagePullPolicy: IfNotPresent
-        command: ["cp", "-r", "/agent/", "/tmp/agent"]
+        command: ["cp", "-r", "/agent", "/tmp/agent"]
         volumeMounts:
         - name: agent
           mountPath: /tmp/agent      
@@ -51,7 +51,7 @@ spec:
               subPath: application.yaml
               mountPath: /application.yaml
             - name: agent
-              mountPath: /agent              
+              mountPath: /agent           
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -69,6 +69,7 @@ spec:
               mountPath: /jmx.yaml
             - name: agent
               mountPath: /agent
+              subPath: /agent
           {{- end }}               
         {{- end }}
       {{- if .Values.config }}     
