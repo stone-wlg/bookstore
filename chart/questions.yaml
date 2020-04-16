@@ -11,13 +11,13 @@ questions:
   group: "default image"
   subquestions:
   - variable: image.repository
-    default: "harbor06.chint.com/chint-public/demo/bookstore"
+    default: "stonewlg/bookstore"
     description: "bookstore image"
     type: string
     label: bookstore image
     required: true
   - variable: image.tag
-    default: "dev"
+    default: "latest"
     description: "bookstore image tag"
     type: string
     label: bookstore image tag
@@ -49,7 +49,7 @@ questions:
   group: "jmx image"
   subquestions:
   - variable: jmx.image.repository
-    default: "harbor06.chint.com/chint-public/bitnami/jmx-exporter"
+    default: "bitnami/jmx-exporter"
     description: "jmx image"
     type: string
     label: jmx image
